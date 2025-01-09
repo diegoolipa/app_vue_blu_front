@@ -1,34 +1,85 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import Login from '../views/auth/Login.vue';
+// src/router/index.ts
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
+import { authGuard } from './guards';
+
+// Importaciones de vistas
 import Register from '../views/auth/Register.vue';
 import Acerca from '../views/web/Acerca.vue';
 import Inicio from '../views/web/Inicio.vue';
+import Login from '../views/auth/Login.vue';
 import Perfil from '../views/admin/perfil/Perfil.vue';
+
+// Importaciones de rutas modulares
 import holaMundoRoutes from './hola-mundo/hola-mundo.routes';
 
-
-const routes = [
-  { path: '/', component: Inicio },
-  { path: '/auth/acerca', component: Acerca },
-  { path: '/auth/register', component: Register },
-  { path: '/auth/login', component: Login },
-  { path: '/admin/perfil', component: Perfil },
+const routes: RouteRecordRaw[] = [
+  {
+    path: '/',
+    component: Inicio,
+    meta: {
+      layout: 'default',
+      title: 'Inicio'
+    }
+  },
+  {
+    path: '/auth',
+    meta: { layout: 'auth' },
+    children: [
+      {
+        path: 'acerca',
+        component: Acerca,
+        meta: { title: 'Acerca de' }
+      },
+      {
+        path: 'register',
+        component: Register,
+        meta: { title: 'Registro' }
+      },
+      {
+        path: 'login',
+        component: Login,
+        meta: { title: 'Iniciar Sesión' }
+      }
+    ]
+  },
+  {
+    path: '/admin',
+    meta: { 
+      requiresAuth: true,
+      layout: 'admin'
+    },
+    children: [
+      {
+        path: 'perfil',
+        component: Perfil,
+        meta: { 
+          title: 'Mi Perfil'
+        }
+      }
+    ]
+  },
+  // Módulo de rutas externo
   holaMundoRoutes,
+  // Ruta para manejar 404
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/'
+  }
 ];
+
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes
 });
 
-//Guards
-// router.beforeEach((to, from, next) => {
-//     const token = localStorage.getItem('access_token') || null;
-//     if (token) {
-        
-//     }
-//     return next( );
-// });
-        
-                    
+// Configurar guards
+router.beforeEach(authGuard);
+
+// Configurar título de la página
+router.afterEach((to) => {
+  document.title = to.meta.title 
+    ? `${to.meta.title} - Resi` 
+    : 'Resi';
+});
 
 export default router;

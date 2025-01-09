@@ -1,4 +1,34 @@
-export default {
-    path: '/hola-mundo',
-    component: () => import('../../components/hola-mundo/HelloWorld.vue'),
-  }
+// src/router/hola-mundo/hola-mundo.routes.ts
+import { type RouteRecordRaw } from 'vue-router';
+
+const holaMundoRoutes: RouteRecordRaw = {
+  path: '/hola-mundo',
+  component: () => import('../../components/hola-mundo/HelloWorld.vue'),
+  meta: {
+    requiresAuth: true,
+    layout: 'admin',
+    title: 'Hola Mundo',
+  },
+  children: [
+    {
+      path: '',
+      name: 'hola-mundo-list',
+      component: () => import('../../components/hola-mundo/HelloWorld.vue'),
+      meta: { title: 'Lista - Hola Mundo' },
+    },
+    // {
+    //   path: 'crear',
+    //   name: 'hola-mundo-create',
+    //   component: () => import('@/views/hola-mundo/HolaMundoCreate.vue'),
+    //   meta: { title: 'Crear - Hola Mundo' }
+    // },
+    // {
+    //   path: 'editar/:id',
+    //   name: 'hola-mundo-edit',
+    //   component: () => import('@/views/hola-mundo/HolaMundoEdit.vue'),
+    //   meta: { title: 'Editar - Hola Mundo' }
+    // }
+  ],
+};
+
+export default holaMundoRoutes;
