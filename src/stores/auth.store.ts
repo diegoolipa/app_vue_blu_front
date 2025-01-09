@@ -8,7 +8,7 @@ export const useAuthStore = defineStore('auth', {
     token: localStorage.getItem('access_token_pinia'),
     loading: false,
     error: null,
-    name: 'Diego Lipa Pine',
+    name: 'Diego Lipa Pinia',
   }),
 
   getters: {

@@ -11,8 +11,10 @@ import Perfil from '../views/admin/perfil/Perfil.vue';
 
 // Importaciones de rutas modulares
 import holaMundoRoutes from './hola-mundo/hola-mundo.routes';
+import AppLayout from '@/layout/AppLayout.vue';
 
 const routes: RouteRecordRaw[] = [
+
   {
     path: '/',
     component: Inicio,
@@ -44,6 +46,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/admin',
+    component: AppLayout,
     meta: { 
       requiresAuth: true,
       layout: 'admin'
