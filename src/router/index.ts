@@ -21,13 +21,13 @@ const router = createRouter({
 });
 
 //Guards
-router.beforeEach((to, from, next) => {
-    const token = localStorage.getItem('access_token') || null;
-    if (token) {
+// router.beforeEach((to, from, next) => {
+//     const token = localStorage.getItem('access_token') || null;
+//     if (token) {
         
-    }
-    return next( );
-});
+//     }
+//     return next( );
+// });
         
                     
 
