@@ -19,6 +19,8 @@ const perfil = ref();
 
 onMounted(()=>{
     getPerfil();
+    console.log('');
+    
 })
 
 const getPerfil = async () => {

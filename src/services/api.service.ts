@@ -16,5 +16,19 @@ export default function api() {
     },
   });
 
+  //interceptor
+  api.interceptors.response.use(
+    response => {
+      return response;
+    },
+    error => {
+      if (error.response?.status === 401) {
+        console.log('gggggggggggggggggggggggggggggggg');
+        localStorage.removeItem('access_token');
+        location.href = '/auth/login';
+      }
+    },
+  );
+
   return api;
 }

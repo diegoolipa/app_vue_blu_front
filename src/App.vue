@@ -8,6 +8,7 @@
   <RouterLink to="/auth/acerca">ACERCA</RouterLink> |
   <RouterLink to="/auth/register">INGRESAR</RouterLink> |
   <RouterLink to="/auth/login">LOGIN</RouterLink> |
+  <RouterLink to="/hola-mundo">Hola Mundo</RouterLink> |
 
   <RouterView />
 </template>
